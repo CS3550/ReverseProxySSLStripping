@@ -1,5 +1,6 @@
 var http = require('http'),
     httpProxy = require('http-proxy');
+const fs=require("fs");
  
 //
 // From: https://www.npmjs.com/package/http-proxy
