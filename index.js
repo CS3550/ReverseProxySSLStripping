@@ -1,21 +1,11 @@
-const https = require('https');
-const httpProxy = require('http-proxy');
-const fs = require("fs");
+const express = require('express');
+const app = express();
 
-var proxy = httpProxy.createProxyServer();
+app.use('/', (req, res)=>{
+  res.send("Hello");
+});
 
-var server = https.createServer(
-  {
-    key: fs.readFileSync('private'),//This is the private key
-    cert: fs.readFileSync('certificate'), //This is the certificate (public key)
-  }, function (req, res) {
-    console.log("Proxying to 8080");
-    proxy.web(req, res, {
-      target: 'http://127.0.0.1:8080',
-    }
-    );
-  });
-
-
-console.log("listening on port 443")
-server.listen(443);
+app.listen(80, err=>{
+  if(err) return console.error(err);
+  console.log("Listening on port 80");
+});
